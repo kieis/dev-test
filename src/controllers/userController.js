@@ -1,6 +1,6 @@
 const { users } = require("../database");
 
-const getUser = (req, res, next) => {
+const getUserById = (req, res, next) => {
   // id instead of name
   const { id } = req.query;
   // search
@@ -42,8 +42,30 @@ const createUser = (req, res, next) => {
   });
 };
 
+const deleteUserById = (req, res, next) => {
+  // id instead of name
+  const { id } = req.query;
+
+  // search by index
+  const userIndexConsult = users.findIndex((user) => user.id === Number(id));
+  if (userIndexConsult < 0) {
+    return res.status(404).send({
+      message: "User not found",
+    });
+  }
+
+  // remove user from list, used splice because 'users' are constant
+  const deletedUser = users.splice(userIndexConsult, 1);
+
+  res.status(200).send({
+    data: deletedUser[0],
+    message: "User deleted successfully",
+  });
+};
+
 module.exports = {
-  getUser,
+  getUserById,
   getUsers,
   createUser,
+  deleteUserById,
 };
