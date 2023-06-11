@@ -24,7 +24,26 @@ const getUsers = (req, res, next) => {
   });
 };
 
+const createUser = (req, res, next) => {
+  const { name, job } = req.body;
+
+  // unnecessary with real db
+  const lastUserAdded = users[users.length - 1];
+  const newUser = {
+    id: lastUserAdded.id + 1,
+    name,
+    job,
+  };
+
+  users.push(newUser);
+  res.status(200).send({
+    data: newUser,
+    message: "User created successfully",
+  });
+};
+
 module.exports = {
   getUser,
   getUsers,
+  createUser,
 };
