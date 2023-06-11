@@ -4,12 +4,6 @@ const app = express();
 
 const userRouter = require("./src/routes/user");
 
-const teste1 = require("./teste1");
-const teste2 = require("./teste2");
-const teste3 = require("./teste3");
-const teste4 = require("./teste4");
-const teste5 = require("./teste5");
-
 app.set("view engine", "jade");
 
 app.use(express.json());

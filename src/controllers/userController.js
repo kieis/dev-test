@@ -79,7 +79,6 @@ const updateUserById = (req, res, next) => {
     });
   }
   const userConsult = users[userIndexConsult];
-
   // set new user info
   const updatedUser = {
     ...userConsult,
