@@ -63,9 +63,39 @@ const deleteUserById = (req, res, next) => {
   });
 };
 
+const updateUserById = (req, res, next) => {
+  const { id } = req.query;
+  const { name, job } = req.body;
+
+  // search
+  const userIndexConsult = users.findIndex((user) => user.id === Number(id));
+  if (userIndexConsult < 0) {
+    return res.status(404).send({
+      message: "User not found",
+    });
+  }
+  const userConsult = users[userIndexConsult];
+
+  // set new user info
+  const updatedUser = {
+    ...userConsult,
+    name: name ? name : userConsult.name,
+    job: job ? job : userConsult.job,
+  };
+
+  // update list
+  users[userIndexConsult] = updatedUser;
+
+  res.status(200).send({
+    data: updatedUser,
+    message: "User updated successfully",
+  });
+};
+
 module.exports = {
   getUserById,
   getUsers,
   createUser,
   deleteUserById,
+  updateUserById,
 };
