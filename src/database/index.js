@@ -11,6 +11,7 @@ const data = {
       job: "Desenvolvedor",
     },
   ],
+  visits: {},
 };
 
 module.exports = data;
